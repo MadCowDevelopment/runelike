@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#111611">
+    <title>Rune Relay</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="assets/png/spellbookmegapack/spellbookmegapack/Flat_Skills_Icons/PNG/green/g_10.PNG" alt="">
+          </span>
+          <div>
+            <p class="eyebrow">A MERGE-BATTLE ROGUELIKE</p>
+            <h1>Rune Relay</h1>
+          </div>
+        </div>
+        <button class="icon-button" id="restart-button" type="button" aria-label="Start a new run" title="New run">↻</button>
+      </header>
+
+      <section class="run-strip" aria-label="Run status">
+        <span class="difficulty-label" id="difficulty-label">STANDARD</span>
+        <span class="run-divider" aria-hidden="true"></span>
+        <span id="wave-label">WAVE 1 / 3</span>
+        <span class="run-divider" aria-hidden="true"></span>
+        <span id="turn-label">TURN 1</span>
+        <span class="run-spacer"></span>
+        <button class="deck-button" id="deck-button" type="button" aria-label="View your rune deck">
+          <span class="deck-count"><span aria-hidden="true">▤</span> <span id="deck-count">8</span> RUNES</span>
+        </button>
+        <span class="gold-count">
+          <img src="assets/png/actionrpgloot/actionrpgloot/ActionLoot_53.png" alt="">
+          <span id="gold-count">0</span>
+        </span>
+      </section>
+
+      <section class="battle-panel" aria-label="Battle">
+        <div class="player-panel">
+          <div class="health-heading">
+            <span class="eyebrow">YOUR VITALITY</span>
+            <span class="health-values"><strong id="player-hp">24</strong><span> / <span id="player-max-hp">24</span></span></span>
+          </div>
+          <div class="meter"><span id="player-health-bar"></span></div>
+          <div class="player-status">
+            <img src="assets/png/spellbookmegapack/spellbookmegapack/Flat_Skills_Icons/PNG/blue/b_01.png" alt="">
+            <span id="block-value">0</span> ward
+          </div>
+          <p class="class-ability" id="class-ability"></p>
+        </div>
+        <div class="versus" aria-hidden="true">VS</div>
+        <div class="enemy-panel">
+          <div class="enemy-topline">
+            <div>
+              <span class="eyebrow" id="enemy-kind">WILD THORN</span>
+              <h2 id="enemy-name">Brambleling</h2>
+            </div>
+            <img class="enemy-avatar" id="enemy-icon" src="assets/png/mobsavataricons/mobsavataricons/Mobs_Plant_Monster_01.png" alt="Brambleling">
+          </div>
+          <div class="enemy-stats">
+            <div class="meter enemy-meter"><span id="enemy-health-bar"></span></div>
+            <strong><span id="enemy-hp">18</span><span class="muted"> HP</span></strong>
+          </div>
+          <div class="intent"><span class="intent-dot"></span><span id="intent-label">Preparing to strike for 4</span></div>
+        </div>
+      </section>
+
+      <section class="board-section" aria-labelledby="board-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE RELAY</p>
+            <h2 id="board-title">Merge board</h2>
+          </div>
+          <p class="board-hint" id="board-hint">Pick a rune, then place it on an empty tile.</p>
+        </div>
+        <div class="board" id="board" role="grid" aria-label="4 by 4 merge board"></div>
+        <div class="legend" aria-label="Rune effects">
+          <span><i class="legend-icon ember"><img src="assets/png/spellbookmegapack/spellbookmegapack/Flat_Skills_Icons/PNG/red/r_16.PNG" alt=""></i> Strike</span>
+          <span><i class="legend-icon ward"><img src="assets/png/spellbookmegapack/spellbookmegapack/Flat_Skills_Icons/PNG/blue/b_01.png" alt=""></i> Ward</span>
+          <span><i class="legend-icon bloom"><img src="assets/png/spellbookmegapack/spellbookmegapack/Flat_Skills_Icons/PNG/green/g_12.png" alt=""></i> Mend</span>
+          <span class="legend-note">Tap any two runes of the same rank to merge and combine their effects</span>
+        </div>
+      </section>
+
+      <section class="hand-section" aria-labelledby="hand-title">
+        <div class="hand-heading">
+          <div>
+            <p class="eyebrow">YOUR TOKEN SET</p>
+            <h2 id="hand-title">Choose a rune <span class="hand-count" id="hand-count">3 READY</span></h2>
+          </div>
+          <span class="draw-label">DRAW 3</span>
+        </div>
+        <div class="hand" id="hand" aria-label="Available runes"></div>
+        <p class="turn-note" id="turn-note" aria-live="polite">Each placement or merge is one move. Enemy attacks every 3 moves.</p>
+      </section>
+
+      <footer class="footer-note">Match runes. Build power. Break the wild.</footer>
+    </main>
+
+    <div class="overlay" id="overlay" hidden>
+      <section class="dialog" id="dialog-panel" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+        <p class="eyebrow" id="dialog-eyebrow">RUN COMPLETE</p>
+        <h2 id="dialog-title">The grove is quiet.</h2>
+        <p class="dialog-copy" id="dialog-copy"></p>
+        <div class="reward-options" id="reward-options"></div>
+        <button class="primary-button" id="dialog-button" type="button">Play again</button>
+      </section>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>

@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg: #111611;
+  --panel: #191f19;
+  --panel-raised: #202820;
+  --line: #303a30;
+  --muted: #899287;
+  --text: #f2f1e8;
+  --green: #b7e477;
+  --green-dark: #28351f;
+  --ember: #ffb36b;
+  --ward: #88c6ff;
+  --bloom: #e7a7cf;
+  --stage-accent: var(--green);
+  --theme-glow: rgba(117, 151, 80, .15);
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% -25%, var(--theme-glow), transparent 55%),
+    var(--bg);
+}
+body[data-theme="crypt"] { --stage-accent: #b7a4d1; --theme-glow: rgba(112, 87, 148, .17); }
+body[data-theme="inferno"] { --stage-accent: #ff9f6b; --theme-glow: rgba(171, 74, 43, .2); }
+body[data-theme="frost"] { --stage-accent: #92ddef; --theme-glow: rgba(69, 135, 164, .18); }
+body[data-theme="wilds"] { --stage-accent: #e1c17a; --theme-glow: rgba(146, 113, 53, .17); }
+
+button { font: inherit; }
+
+.game-shell {
+  width: min(100% - 32px, 680px);
+  margin: 0 auto;
+  padding: max(12px, env(safe-area-inset-top)) 0 max(12px, env(safe-area-inset-bottom));
+}
+
+.topbar, .brand, .run-strip, .section-heading, .hand-heading, .enemy-topline,
+.enemy-stats, .health-heading, .player-status, .intent, .legend, .hand {
+  display: flex;
+  align-items: center;
+}
+
+.topbar { justify-content: space-between; margin-bottom: 10px; }
+.brand { gap: 12px; }
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border: 1px solid #46533e;
+  border-radius: 14px;
+  color: var(--green);
+  background: #20291d;
+  font-size: 25px;
+}
+.brand-mark img { width: 30px; height: 30px; object-fit: contain; }
+
+.eyebrow {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+h1, h2, p { margin-top: 0; }
+h1, h2 { font-family: 'Space Grotesk', sans-serif; }
+h1 { margin: 3px 0 0; font-size: 22px; line-height: 1; letter-spacing: -.04em; }
+h2 { margin: 4px 0 0; font-size: 17px; line-height: 1.1; letter-spacing: -.025em; }
+
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: #dce2d6;
+  background: var(--panel);
+  cursor: pointer;
+  font-size: 23px;
+}
+.icon-button:active { transform: scale(.96); }
+
+.run-strip {
+  gap: 12px;
+  min-height: 30px;
+  margin-bottom: 7px;
+  padding: 0 4px;
+  color: #b8c0b4;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+.difficulty-label { color: var(--stage-accent); white-space: nowrap; }
+.run-divider { width: 1px; height: 13px; background: var(--line); }
+.run-spacer { flex: 1; }
+.deck-count { color: var(--green); }
+.deck-count span { font-size: 14px; vertical-align: -1px; }
+.deck-button { padding: 4px 7px; border: 1px solid transparent; border-radius: 7px; background: transparent; cursor: pointer; }
+.deck-button:hover { border-color: #526348; background: #20291d; }
+.gold-count { display: inline-flex; align-items: center; gap: 4px; color: #e9c57d; font-size: 10px; font-weight: 800; letter-spacing: .08em; white-space: nowrap; }
+.gold-count img { width: 18px; height: 18px; object-fit: contain; }
+
+.battle-panel {
+  display: grid;
+  grid-template-columns: 1fr 30px 1.25fr;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: linear-gradient(135deg, #1c241b, #191e19 70%);
+}
+.health-heading { justify-content: space-between; gap: 8px; }
+.health-values { white-space: nowrap; font-family: 'Space Grotesk', sans-serif; font-size: 15px; }
+.health-values span { color: var(--muted); font-size: 11px; }
+.meter { height: 6px; overflow: hidden; margin-top: 6px; border-radius: 10px; background: #30372f; }
+.meter > span { display: block; height: 100%; width: 100%; border-radius: inherit; background: var(--green); transition: width .25s ease; }
+.player-status { gap: 5px; margin-top: 5px; color: var(--ward); font-size: 11px; font-weight: 700; }
+.player-status img { width: 16px; height: 16px; object-fit: contain; }
+.class-ability { margin: 2px 0 0; color: var(--muted); font-size: 8px; line-height: 1.3; }
+.versus { color: #64705f; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-align: center; }
+.enemy-topline { justify-content: space-between; gap: 8px; }
+.enemy-topline h2 { font-size: 16px; }
+.enemy-avatar { width: 62px; height: 62px; flex: 0 0 62px; border: 1px solid #ffffff20; border-radius: 15px; background: radial-gradient(circle at 50% 35%, #3d4937, #20271f 72%); object-fit: contain; filter: drop-shadow(0 5px 10px #0008); }
+.enemy-stats { gap: 9px; }
+.enemy-meter { flex: 1; }
+.enemy-meter > span { background: #f29a72; }
+.enemy-stats strong { white-space: nowrap; font-family: 'Space Grotesk', sans-serif; font-size: 12px; }
+.muted { color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 10px; }
+.intent { gap: 6px; margin-top: 5px; color: #e9aa88; font-size: 10px; font-weight: 600; }
+.intent-dot { width: 6px; height: 6px; border-radius: 50%; background: #f29a72; box-shadow: 0 0 9px #f29a7270; }
+
+.board-section { margin-top: 13px; }
+.section-heading { justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.board-hint { max-width: 190px; margin: 0; color: var(--muted); font-size: 11px; text-align: right; line-height: 1.45; }
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: min(100%, 280px);
+  margin: 0 auto;
+  gap: 6px;
+  padding: 7px;
+  border: 1px solid #303a30;
+  border-radius: 17px;
+  background: #171d17;
+  touch-action: manipulation;
+}
+.board-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  border: 1px solid #30392f;
+  border-radius: 12px;
+  color: var(--text);
+  background: #202720;
+  cursor: pointer;
+  transition: background .14s, border-color .14s, transform .14s;
+}
+.board-cell.empty::after {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #465044;
+  content: "";
+}
+.board-cell.empty:hover, .board-cell.valid-target { border-color: #7b9857; background: #273224; }
+.board-cell:active { transform: scale(.96); }
+.board-cell.filled { border-color: #475144; background: #2a3328; }
+.board-cell.selected-source { outline: 2px solid var(--green); outline-offset: 1px; }
+.board-cell.merge-target { border-color: var(--green); box-shadow: inset 0 0 0 1px #b7e4776b; }
+.board-cell.ember-cell { border-color: #76553c; background: linear-gradient(145deg, #3b3026, #292720); }
+.board-cell.ward-cell { border-color: #405b70; background: linear-gradient(145deg, #263642, #252a2b); }
+.board-cell.bloom-cell { border-color: #694e62; background: linear-gradient(145deg, #392b38, #29272a); }
+.board-cell.fusion-cell { border-color: #7c6652; background: linear-gradient(145deg, #43372a, #342d35); }
+.tile-icon { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; line-height: 1; }
+.tile-icon img { width: 29px; height: 29px; }
+.tile-icon.fused-art img { width: 34px; height: 34px; filter: drop-shadow(0 2px 4px #0008); }
+.tile-icon.fused-art.parts-2 img { width: 16px; height: 23px; }
+.tile-icon.fused-art.parts-3 img { width: 12px; height: 21px; }
+.tile-icon.fused-art.parts-many img { width: 10px; height: 14px; }
+.tile-rank {
+  position: absolute;
+  right: 5px;
+  bottom: 4px;
+  display: grid;
+  place-items: center;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border: 1px solid #ffffff1c;
+  border-radius: 6px;
+  color: #fff;
+  background: #111611c9;
+  font-size: 9px;
+  font-weight: 800;
+}
+.legend { flex-wrap: wrap; gap: 8px; margin: 7px 2px 0; color: #bdc4b7; font-size: 10px; }
+.legend > span { display: inline-flex; align-items: center; gap: 5px; }
+.legend-icon { display: grid; place-items: center; width: 19px; height: 19px; border-radius: 5px; font-size: 11px; font-style: normal; }
+.legend-icon img { width: 16px; height: 16px; object-fit: contain; }
+.legend-icon.ember { color: var(--ember); background: #392d23; }
+.legend-icon.ward { color: var(--ward); background: #263541; }
+.legend-icon.bloom { color: var(--bloom); background: #392a36; }
+.legend-note { flex-basis: 100%; color: var(--muted); font-size: 9px; }
+
+.hand-section { margin-top: 13px; }
+.hand-heading { justify-content: space-between; margin-bottom: 6px; }
+.hand-heading h2 { font-size: 16px; }
+.hand-count { margin-left: 5px; color: var(--muted); font: 700 9px 'DM Sans', sans-serif; letter-spacing: .08em; }
+.draw-label { padding: 6px 8px; border: 1px solid var(--line); border-radius: 7px; color: #aab3a5; font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+.hand { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+.rune-card {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  min-height: 76px;
+  padding: 8px 7px;
+  border: 1px solid #374035;
+  border-radius: 13px;
+  color: var(--text);
+  background: var(--panel);
+  text-align: left;
+  cursor: pointer;
+  transition: transform .14s, border-color .14s, background .14s;
+}
+.rune-card:active { transform: scale(.97); }
+.rune-card.selected { border-color: var(--green); background: #263021; box-shadow: 0 0 0 1px #b7e47722; }
+.rune-card:disabled { cursor: default; opacity: .55; }
+.rune-card-icon { display: flex; flex: 0 0 34px; align-items: center; justify-content: center; gap: 0; width: 34px; height: 34px; overflow: hidden; border-radius: 10px; }
+.rune-card-icon img { width: 27px; height: 27px; object-fit: contain; }
+.rune-card-icon.parts-2 img { width: 16px; height: 23px; }
+.rune-card-icon.parts-3 img { width: 12px; height: 21px; }
+.rune-card-icon.parts-many img { width: 10px; height: 14px; }
+.rune-card.ember .rune-card-icon { color: var(--ember); background: #392d23; }
+.rune-card.ward .rune-card-icon { color: var(--ward); background: #263541; }
+.rune-card.bloom .rune-card-icon { color: var(--bloom); background: #392a36; }
+.rune-card.venom .rune-card-icon, .board-cell.venom-cell { color: #b6df78; background: #29351f; }
+.rune-card.frost .rune-card-icon, .board-cell.frost-cell { color: #98e4f4; background: #20343a; }
+.rune-card.thorn .rune-card-icon, .board-cell.thorn-cell { color: #d49770; background: #3a2a24; }
+.rune-card.spark .rune-card-icon, .board-cell.spark-cell { color: #e4d27a; background: #39351e; }
+.rune-card.leech .rune-card-icon, .board-cell.leech-cell { color: #e78288; background: #3c242a; }
+.rune-card.bleed .rune-card-icon, .board-cell.bleed-cell { color: #ee8f83; background: #402622; }
+.rune-card.arcane .rune-card-icon, .board-cell.arcane-cell { color: #c5a3ef; background: #302740; }
+.rune-card.tide .rune-card-icon, .board-cell.tide-cell { color: #82d6d3; background: #203a3a; }
+.rune-card.rift .rune-card-icon, .board-cell.rift-cell { color: #d59be0; background: #39263e; }
+.rune-card.fusion .rune-card-icon { background: #39332b; }
+.rune-card-copy { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: 2px; }
+.rune-card-copy strong { display: block; max-width: 100%; overflow: hidden; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.rune-card-copy small { display: block; color: var(--muted); font-size: 9px; }
+.rune-card-copy .rune-rank { color: var(--stage-accent); font-size: 8px; text-transform: uppercase; }
+.rune-actions { display: grid; gap: 3px; max-width: 100%; margin-top: 2px; }
+.rune-effect-line { display: block; max-width: 100%; padding: 2px 4px; border-radius: 4px; color: #fff; font-size: 8px; font-weight: 800; letter-spacing: .015em; line-height: 1.2; overflow-wrap: anywhere; }
+.rune-effect-line.ember { background: #654027; }
+.rune-effect-line.ward { background: #294f69; }
+.rune-effect-line.bloom { background: #653d5a; }
+.rune-effect-line.venom { background: #3d592c; }
+.rune-effect-line.frost { background: #285466; }
+.rune-effect-line.thorn { background: #633f2e; }
+.rune-effect-line.spark { background: #5a5125; }
+.rune-effect-line.leech { background: #632c3a; }
+.rune-effect-line.bleed { background: #68352d; }
+.rune-effect-line.arcane { background: #4a3666; }
+.rune-effect-line.tide { background: #285956; }
+.rune-effect-line.rift { background: #63386d; }
+.rune-shortcut { display: grid; flex: 0 0 20px; place-items: center; width: 20px; height: 22px; margin-left: auto; border: 1px solid #465044; border-radius: 6px; color: #aeb8a7; background: #171d17; font: 700 10px 'DM Sans', sans-serif; }
+.turn-note { min-height: 16px; margin: 6px 2px 0; color: var(--muted); font-size: 10px; text-align: center; }
+.footer-note { margin-top: 15px; color: #697266; font-size: 10px; letter-spacing: .08em; text-align: center; }
+
+.overlay {
+  position: fixed;
+  z-index: 5;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #080b08d9;
+  backdrop-filter: blur(6px);
+}
+.overlay[hidden] { display: none; }
+.dialog { width: min(100%, 430px); max-height: min(90vh, 760px); overflow: auto; padding: 25px; border: 1px solid #414d3e; border-radius: 20px; background: #1a2119; box-shadow: 0 24px 80px #0008; text-align: center; }
+.dialog h2 { margin-top: 9px; font-size: 25px; }
+.dialog-copy { margin: 9px 0 20px; color: #adb6a8; font-size: 13px; line-height: 1.55; }
+.dialog.victory-dialog { border-color: #829a58; background: radial-gradient(ellipse at 50% 0, #39472b, #1a2119 72%); box-shadow: 0 0 55px #a4cd5540, 0 24px 80px #0008; animation: victory-arrive .35s ease-out both; }
+.victory-dialog #dialog-eyebrow { color: var(--green); letter-spacing: .24em; }
+.victory-dialog h2 { color: #e8f7cc; text-shadow: 0 0 22px #b7e47755; }
+.victory-dialog .dialog-copy { margin-bottom: 0; color: #c5d6ad; font-weight: 700; }
+@keyframes victory-arrive { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.reward-options { display: grid; max-height: 48vh; gap: 8px; overflow-y: auto; margin: 0 0 15px; padding: 2px; }
+.reward-options:empty { display: none; }
+.reward-option { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px; border: 1px solid var(--line); border-radius: 11px; color: var(--text); background: #222a21; text-align: left; cursor: pointer; }
+.reward-option:hover { border-color: var(--green); }
+.reward-option.selected { border-color: var(--green); background: #2a3524; }
+.reward-option.rarity-rare { border-color: #579bc0; }
+.reward-option.rarity-epic { border-color: #9a78d2; }
+.reward-option.rarity-legendary { border-color: #d7a94e; background: #342b1c; }
+.reward-option:disabled { cursor: not-allowed; opacity: .45; }
+.reward-option.deck-entry { cursor: default; }
+.reward-option.deck-entry:hover { border-color: var(--line); }
+.option-icon { display: flex; flex: 0 0 42px; align-items: center; justify-content: center; gap: 1px; width: 42px; height: 38px; overflow: hidden; border-radius: 9px; background: #182019; }
+.option-icon img { width: 30px; height: 30px; object-fit: contain; }
+.option-icon img + img { width: 18px; height: 24px; }
+.option-icon img:nth-child(3) { width: 14px; height: 22px; }
+.option-icon { color: var(--green); font-size: 21px; }
+.reward-option strong { display: block; font-size: 12px; }
+.reward-option small { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; }
+.primary-button { width: 100%; min-height: 45px; border: 0; border-radius: 11px; color: #172013; background: var(--green); font-weight: 800; cursor: pointer; }
+.primary-button:active { transform: scale(.98); }
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog.victory-dialog { animation: none; }
+}
+
+@media (min-width: 600px) {
+  .game-shell { padding-top: 34px; }
+  .board { gap: 6px; padding: 7px; }
+  .board-cell { border-radius: 12px; }
+  .battle-panel { padding: 20px; }
+  .rune-card { min-height: 76px; padding: 8px 7px; }
+}
+
+@media (max-width: 380px) {
+  .game-shell { width: min(100% - 22px, 680px); }
+  .battle-panel { grid-template-columns: 1fr 20px 1.15fr; gap: 8px; padding: 12px; }
+  .eyebrow { font-size: 9px; }
+  .board { gap: 5px; padding: 6px; }
+  .board-cell { border-radius: 9px; }
+  .hand { gap: 6px; }
+  .rune-card { gap: 5px; padding: 7px 5px; }
+  .rune-card-icon { flex-basis: 29px; width: 29px; height: 29px; }
+  .rune-card-copy strong { font-size: 10px; }
+  .rune-card-copy small { font-size: 8px; }
+  .rune-effect-line { padding: 2px 3px; font-size: 7px; }
+  .rune-shortcut { position: absolute; top: 4px; right: 4px; width: 17px; height: 18px; min-height: 18px; font-size: 9px; }
+  .legend { gap: 8px; }
+  .legend-note { flex-basis: 100%; margin-left: 0; }
+}
